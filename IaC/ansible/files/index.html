@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tram Nguyen - DevOps Engineer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .cv-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            margin: 0 auto 20px;
+            background: linear-gradient(45deg, #f39c12, #e74c3c);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: white;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+
+        .name {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .title {
+            font-size: 1.3em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+            padding: 40px;
+        }
+
+        .sidebar {
+            background: rgba(52, 152, 219, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            height: fit-content;
+        }
+
+        .content {
+            padding-left: 20px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #e74c3c;
+        }
+
+        .skill-item, .language-item {
+            margin-bottom: 15px;
+        }
+
+        .skill-name, .language-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .skill-bar {
+            height: 8px;
+            background: rgba(52, 152, 219, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            border-radius: 4px;
+            transition: width 2s ease;
+            animation: skillLoad 2s ease-in-out;
+        }
+
+        @keyframes skillLoad {
+            from { width: 0; }
+        }
+
+        .experience-item, .education-item {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 12px;
+            border-left: 4px solid #3498db;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .experience-item:hover, .education-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .job-title, .degree {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .company, .school {
+            font-size: 1.1em;
+            color: #3498db;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .duration {
+            color: #7f8c8d;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .description {
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .about-text {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #555;
+            text-align: justify;
+        }
+
+        .achievement-list {
+            list-style: none;
+        }
+
+        .achievement-list li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .achievement-list li::before {
+            content: '🏆';
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 20px;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .name {
+                font-size: 2em;
+            }
+            
+            .content {
+                padding-left: 0;
+            }
+        }
+
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shape:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            top: 60%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .shape:nth-child(3) {
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-shapes">
+        <div class="shape" style="width: 100px; height: 100px; background: #3498db; border-radius: 50%;"></div>
+        <div class="shape" style="width: 80px; height: 80px; background: #e74c3c; border-radius: 50%;"></div>
+        <div class="shape" style="width: 120px; height: 120px; background: #f39c12; border-radius: 50%;"></div>
+    </div>
+
+    <div class="container">
+        <div class="cv-card">
+            <div class="header">
+                <div class="profile-img">NT</div>
+                <h1 class="name">Nguyen Thi Bao Tram</h1>
+                <p class="title">DevOps Engineer, Streaming Data Platform</p>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span>📧</span>
+                        <span>baotram23764@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>📱</span>
+                        <span>0353345869</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>💼</span>
+                        <span>LinkedIn</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>🔗</span>
+                        <span>GitHub</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <div class="sidebar">
+                    <div class="section">
+                        <h2 class="section-title">Skills</h2>
+                        <ul class="achievement-list" style="list-style: none; padding: 0;">
+                            <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
+                                <span style="position: absolute; left: 0; top: 0; color: #3498db;">•</span>
+                                AWS services (IAM, VPC, EC2, S3, Athena, Redshift, RDS, EMR, Lambda)
+                            </li>
+                            <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
+                                <span style="position: absolute; left: 0; top: 0; color: #3498db;">•</span>
+                                IaC: Terraform
+                            </li>
+                            <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
+                                <span style="position: absolute; left: 0; top: 0; color: #3498db;">•</span>
+                                Orchestration: Airflow
+                            </li>
+                            <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
+                                <span style="position: absolute; left: 0; top: 0; color: #3498db;">•</span>
+                                CI/CD: CodeCommit, CodeBuild, CodePipeline
+                            </li>
+                            <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
+                                <span style="position: absolute; left: 0; top: 0; color: #3498db;">•</span>
+                                Linux Admin, Networking
+                            </li>
+                            <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
+                                <span style="position: absolute; left: 0; top: 0; color: #3498db;">•</span>
+                                Python, Bash, PySpark
+                            </li>
+                            <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
+                                <span style="position: absolute; left: 0; top: 0; color: #3498db;">•</span>
+                                Power Automate, Docker
+                            </li>
+                            <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
+                                <span style="position: absolute; left: 0; top: 0; color: #3498db;">•</span>
+                                Quick learner, strong research skills
+                            </li>
+                            <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
+                                <span style="position: absolute; left: 0; top: 0; color: #3498db;">•</span>
+                                Teamwork, cross-functional collaboration
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <h2 class="section-title">Languages</h2>
+                        <div class="language-item">
+                            <div class="language-name">
+                                <span>Vietnamese</span>
+                                <span>Native</span>
+                            </div>
+                        </div>
+                        <div class="language-item">
+                            <div class="language-name">
+                                <span>English</span>
+                                <span>IELTS 7.0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h2 class="section-title">Achievements</h2>
+                        <ul class="achievement-list">
+                            <li>Winner of AMCHAM Scholarship 2023</li>
+                            <li>Top 25 ACTIVATOR Scholarship (Bosch)</li>
+                            <li>First-prize team at UEL Young Scientist Awards 2022</li>
+                            <li>UEL Learning Encouragement Scholarship 2020</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="content">
+                    <div class="section">
+                        <h2 class="section-title">About Me</h2>
+                        <p class="about-text">
+                            <strong>Proactive</strong> and <strong>Responsible</strong> are the two words I choose to define myself.
+                            I thrive in DevOps environments, where I can continuously grow, explore new technologies, and develop 
+                            scalable, automated Cloud solutions.
+                        </p>
+                    </div>
+
+                    <div class="section">
+                        <h2 class="section-title">Professional Experience</h2>
+                        <div class="experience-item">
+                            <div class="job-title">Data Engineer / Platform Engineer</div>
+                            <div class="company">TTC AgriS Company</div>
+                            <div class="duration">July 2024 - Present</div>
+                            <div class="description">
+                                <strong>Cloud-based Data Platform Deployment on AWS</strong>
+                                <br>• Assist in exploring best practices for provisioning and maintaining AWS infrastructure via Terraform, configuring remote backend with S3 and DynamoDB
+                                <br>• Experience in using IAM, VPC, EC2, EMR, S3, RDS, Redshift, DynamoDB, and Lambda
+                                <br>• Build and integrate CI/CD pipelines for dbt models using CodeBuild and CodePipeline
+                                <br><br><strong>Data Pipeline Engineering and Operations</strong>
+                                <br>• Collaborate with DBAs and technical teams to troubleshoot data access challenges and implement scalable extraction strategies;
+                                <br>• Design and develop data pipelines to extract and transform data from diverse sources (web platforms, APIs, SharePoint, databases, Oracle Fusion), support data pipelines for 5+ centers.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h2 class="section-title">Publications</h2>
+                        <div class="education-item">
+                            <div class="degree">Research Article</div>
+                            <div class="school">"Customer experience discovery model based on Sentiment analysis and Machine learning method"</div>
+                            <div class="duration">Published Research</div>
+                            <div class="description">
+                                Developed an innovative approach combining sentiment analysis and machine learning techniques 
+                                to discover customer experience patterns, demonstrating strong research and analytical capabilities.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h2 class="section-title">Education</h2>
+                        <div class="education-item">
+                            <div class="degree">Bachelor of Electronic Commerce</div>
+                            <div class="school">University of Economics and Law</div>
+                            <div class="duration">GPA: 3.5/4.0</div>
+                            <div class="description">
+                                Strong academic foundation in electronic commerce, combining business and technology expertise.
+                                Active participant in research and academic competitions, demonstrating analytical and problem-solving skills.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add smooth animations when elements come into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        // Observe all sections for animation
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+
+        // Add interactive hover effects to skill bars
+        document.querySelectorAll('.skill-item').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                const progressBar = item.querySelector('.skill-progress');
+                progressBar.style.background = 'linear-gradient(90deg, #e74c3c, #f39c12)';
+            });
+            
+            item.addEventListener('mouseleave', () => {
+                const progressBar = item.querySelector('.skill-progress');
+                progressBar.style.background = 'linear-gradient(90deg, #3498db, #2ecc71)';
+            });
+        });
+    </script>
+</body>
+</html>
