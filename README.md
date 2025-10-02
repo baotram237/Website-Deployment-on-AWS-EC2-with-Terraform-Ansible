@@ -1,4 +1,4 @@
-# linux_lab
+# Website Deployment on AWS EC2 with Terraform & Ansible
 📌 Project Overview
 This project demonstrates a fully automated deployment of a web application to AWS EC2 using:
 
@@ -8,16 +8,17 @@ This project demonstrates a fully automated deployment of a web application to A
 
 1. Terraform provisions the AWS resources:
 
-VPC, subnets, internet gateway
+- VPC, subnets, internet gateway
 
-Security groups
+- Security groups
 
-EC2 instance
+- EC2 instance
 
 2. Ansible connects to the provisioned EC2 instance to:
 
-Install required packages (Nginx, dependencies)
+- Install required packages (Nginx, dependencies)
 
-Deploy the website files
+- Deploy the website files
 
-Configure and start services
+- Configure and start services
+  
